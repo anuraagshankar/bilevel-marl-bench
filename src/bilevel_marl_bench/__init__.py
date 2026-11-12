@@ -9,9 +9,9 @@ def make(name, **kwargs):
 
         return CombinedArms(**kwargs)
     if name == "battlefield":
-        from magent2.environments import battlefield_v5
+        from .battlefield import Battlefield
 
-        return battlefield_v5.parallel_env(**kwargs)
+        return Battlefield(**kwargs)
     if name == "football":
         from .football import FootballScenario
         from .vmas_parallel import VmasParallelEnv

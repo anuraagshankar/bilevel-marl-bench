@@ -9,7 +9,7 @@ Multi-agent environments for testing bilevel strategies. Every environment is a 
 | Name | Based on | Changes |
 |---|---|---|
 | `combined_arms` | [MAgent2](https://magent2.farama.org/environments/combined_arms/) | Melee and ranged counts set per team |
-| `battlefield` | [MAgent2](https://magent2.farama.org/environments/battlefield/) | None |
+| `battlefield` | [MAgent2](https://magent2.farama.org/environments/battlefield/) | Melee and ranged units, counts set per team |
 | `football` | [VMAS](https://github.com/proroklab/VectorizedMultiAgentSimulator) | Player roles set per team |
 | `paintball` | [Melting Pot](https://github.com/google-deepmind/meltingpot) via [Shimmy](https://shimmy.farama.org/environments/meltingpot/) | None |
 
@@ -50,6 +50,18 @@ env = make("combined_arms", red_melee=2, red_ranged=3, blue_melee=3, blue_ranged
 
 Defaults are 45 melee and 36 ranged per team.
 
+### Battlefield
+
+<p align="center">
+  <img src="assets/battlefield.png" width="360" alt="Battlefield">
+</p>
+
+```python
+env = make("battlefield", red_melee=8, red_ranged=4, blue_melee=4, blue_ranged=8)
+```
+
+Combined arms units on battlefield's walled map. Defaults are 6 melee and 6 ranged per team.
+
 ### Football
 
 <p align="center">
@@ -62,6 +74,8 @@ env = make("football", blue_roles={"gk": 1, "fwd": 2}, red_roles={"gk": 1, "def"
 
 Roles are `gk`, `def` and `fwd`. Defaults are one of each per team. Both teams are agents by default; pass `ai_blue_agents=True` or `ai_red_agents=True` to let VMAS's built-in AI control a team.
 
+Players spawn by role: goalkeepers in the D, defenders in the middle third of their half, forwards in the third next to the centre line.
+
 The fan in front of each player is its shooting zone: the player can shoot when the ball is inside it (the fan turns pink).
 
 ## Examples
@@ -69,5 +83,6 @@ The fan in front of each player is its shooting zone: the player can shoot when 
 ```bash
 python examples/random_rollout.py   # all environments
 python examples/combined_arms.py    # combined arms with custom team composition
+python examples/battlefield.py      # battlefield with custom team composition
 python examples/football.py         # football with custom roles per team
 ```

@@ -51,9 +51,13 @@ class CombinedArms(_parallel_env):
             seed,
         )
         EzPickle.__init__(
-            self, red_melee, red_ranged, blue_melee, blue_ranged, map_size,
-            max_cycles, minimap_mode, extra_features, render_mode, seed, **reward_args,
+            self, red_melee=red_melee, red_ranged=red_ranged, blue_melee=blue_melee,
+            blue_ranged=blue_ranged, map_size=map_size, max_cycles=max_cycles,
+            minimap_mode=minimap_mode, extra_features=extra_features,
+            render_mode=render_mode, seed=seed, **reward_args,
         )
+
+    walls = set()  # Wall cells; formation columns touching them are skipped.
 
     def generate_map(self):
         w = h = self.map_size
@@ -61,10 +65,19 @@ class CombinedArms(_parallel_env):
         for team, counts in enumerate(self.counts):
             rows, columns = _formation(*counts)
             y0 = (h - 2 * rows) // 2
-            x0 = w // 2 - gap - 2 * len(columns) if team == 0 else w // 2 + gap
+            # Column x positions, outward from the centre, skipping columns that hit a wall.
+            step = -2 if team == 0 else 2
+            x = w // 2 - gap - 2 if team == 0 else w // 2 + gap
+            xs = []
+            while len(xs) < len(columns):
+                if not any((x, y0 + 2 * j) in self.walls for j in range(rows)):
+                    xs.append(x)
+                x += step
+            if team == 0:
+                xs.reverse()  # Original order: left team's first column is the outermost.
             pos = [[], []]
             for i, (t, k) in enumerate(columns):
-                pos[t] += [[x0 + 2 * i, y0 + 2 * j] for j in range(k)]
+                pos[t] += [[xs[i], y0 + 2 * j] for j in range(k)]
             for x, y in pos[0] + pos[1]:
                 if not (0 < x < w - 1 and 0 < y < h - 1):
                     raise ValueError(
