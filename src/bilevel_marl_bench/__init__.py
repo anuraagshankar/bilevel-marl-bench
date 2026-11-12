@@ -5,9 +5,9 @@ ENVS = ["combined_arms", "battlefield", "football", "paintball"]
 
 def make(name, **kwargs):
     if name == "combined_arms":
-        from magent2.environments import combined_arms_v6
+        from .combined_arms import CombinedArms
 
-        return combined_arms_v6.parallel_env(**kwargs)
+        return CombinedArms(**kwargs)
     if name == "battlefield":
         from magent2.environments import battlefield_v5
 

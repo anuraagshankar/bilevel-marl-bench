@@ -41,6 +41,8 @@ class VmasParallelEnv(ParallelEnv):
         truncations = {a: trunc for a in self.agents}
         if term or trunc:
             self.agents = []
+        if self.render_mode == "human":
+            self.render()
         return obs, rewards, terminations, truncations, infos
 
     def render(self):

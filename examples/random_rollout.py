@@ -3,9 +3,9 @@
 from bilevel_marl_bench import ENVS, make
 
 for name in ENVS:
-    env = make(name)
+    env = make(name, render_mode="human")
     obs, infos = env.reset(seed=0)
-    for _ in range(20):
+    for _ in range(100):
         if not env.agents:
             break
         actions = {a: env.action_space(a).sample() for a in env.agents}
