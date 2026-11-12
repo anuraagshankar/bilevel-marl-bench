@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bilevel-marl-bench"
+version = "0.0.1"
+requires-python = ">=3.11"
+dependencies = ["pettingzoo>=1.24"]
+
+[project.optional-dependencies]
+magent = ["magent2==0.3.4"]
+vmas = ["vmas==1.5.2", "gymnasium", "shimmy==2.0.1"]
+meltingpot = ["dm-meltingpot==2.4.1", "shimmy==2.0.1"]
+all = ["bilevel-marl-bench[magent,vmas,meltingpot]"]
