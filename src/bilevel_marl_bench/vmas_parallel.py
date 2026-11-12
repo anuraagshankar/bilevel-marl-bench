@@ -7,7 +7,8 @@ from pettingzoo import ParallelEnv
 class VmasParallelEnv(ParallelEnv):
     metadata = {"name": "vmas", "render_modes": ["human", "rgb_array"]}
 
-    def __init__(self, scenario, max_steps=None, render_mode=None, **kwargs):
+    def __init__(self, scenario, title="VMAS", max_steps=None, render_mode=None, **kwargs):
+        self.title = title
         self.render_mode = render_mode
         self._env = vmas.make_env(
             scenario,
@@ -46,7 +47,10 @@ class VmasParallelEnv(ParallelEnv):
         return obs, rewards, terminations, truncations, infos
 
     def render(self):
-        return self._env.render()
+        frame = self._env.render()
+        if self.render_mode == "human":  # VMAS creates the window on first render, untitled
+            self._env.unwrapped.viewer.window.set_caption(self.title)
+        return frame
 
     def close(self):
         self._env.close()

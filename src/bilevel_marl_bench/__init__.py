@@ -13,9 +13,10 @@ def make(name, **kwargs):
 
         return battlefield_v5.parallel_env(**kwargs)
     if name == "football":
+        from .football import FootballScenario
         from .vmas_parallel import VmasParallelEnv
 
-        return VmasParallelEnv("football", **kwargs)
+        return VmasParallelEnv(FootballScenario(), title="Football", **kwargs)
     if name == "paintball":
         from shimmy import MeltingPotCompatibilityV0
 
