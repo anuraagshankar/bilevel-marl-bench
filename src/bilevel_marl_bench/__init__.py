@@ -1,6 +1,6 @@
 """Bilevel MARL benchmark. Every environment is a PettingZoo ParallelEnv."""
 
-ENVS = ["combined_arms", "battlefield", "football", "paintball"]
+ENVS = ["combined_arms", "battlefield", "football", "capture_the_flag", "king_of_the_hill"]
 
 
 def make(name, **kwargs):
@@ -17,9 +17,8 @@ def make(name, **kwargs):
         from .vmas_parallel import VmasParallelEnv
 
         return VmasParallelEnv(FootballScenario(), title="Football", **kwargs)
-    if name == "paintball":
-        from shimmy import MeltingPotCompatibilityV0
+    if name in ("capture_the_flag", "king_of_the_hill"):
+        from .paintball import Paintball
 
-        variant = kwargs.pop("variant", "capture_the_flag")  # or "king_of_the_hill"
-        return MeltingPotCompatibilityV0(substrate_name=f"paintball__{variant}", **kwargs)
+        return Paintball(name, **kwargs)
     raise ValueError(f"Unknown env '{name}'. Available: {ENVS}")

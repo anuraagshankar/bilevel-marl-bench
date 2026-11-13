@@ -11,7 +11,8 @@ Multi-agent environments for testing bilevel strategies. Every environment is a 
 | `combined_arms` | [MAgent2](https://magent2.farama.org/environments/combined_arms/) | Melee and ranged counts set per team |
 | `battlefield` | [MAgent2](https://magent2.farama.org/environments/battlefield/) | Melee and ranged units, counts set per team |
 | `football` | [VMAS](https://github.com/proroklab/VectorizedMultiAgentSimulator) | Player roles set per team |
-| `paintball` | [Melting Pot](https://github.com/google-deepmind/meltingpot) via [Shimmy](https://shimmy.farama.org/environments/meltingpot/) | None |
+| `capture_the_flag` | [Melting Pot](https://github.com/google-deepmind/meltingpot) via [Shimmy](https://shimmy.farama.org/environments/meltingpot/) | None |
+| `king_of_the_hill` | [Melting Pot](https://github.com/google-deepmind/meltingpot) via [Shimmy](https://shimmy.farama.org/environments/meltingpot/) | None |
 
 ## Installation
 
