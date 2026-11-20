@@ -13,6 +13,7 @@ Multi-agent environments for testing bilevel strategies. Every environment is a 
 | `football` | [VMAS](https://github.com/proroklab/VectorizedMultiAgentSimulator) | Player roles set per team |
 | `capture_the_flag` | [Melting Pot](https://github.com/google-deepmind/meltingpot) via [Shimmy](https://shimmy.farama.org/environments/meltingpot/) | Wide and long shooters, counts set per team |
 | `king_of_the_hill` | [Melting Pot](https://github.com/google-deepmind/meltingpot) via [Shimmy](https://shimmy.farama.org/environments/meltingpot/) | Wide and long shooters, counts set per team |
+| `pacman_ctf` | [Pacman Capture the Flag](https://github.com/aig-upf/pacman-contest) | Roles set per team |
 
 ## Installation
 
@@ -109,6 +110,29 @@ A team scores every step it holds the hill in the centre (80% painted in its col
 
 Both games take an optional `map_name`: `"default"` (the original map, used if omitted), `"open"` or `"cover"`.
 
+### Pacman capture the flag
+
+<p align="center">
+  <img src="assets/pacman_ctf.png" width="480" alt="Pacman capture the flag">
+</p>
+
+```python
+env = make("pacman_ctf", red_roles={"border": 1, "greedy": 1}, blue_roles={"deep": 1, "capped": 1}, attacker_food=5)
+```
+
+A team scores by eating food on the enemy side and bringing it back home. Agents move one at a time, as in the original game; each parallel step moves every agent once.
+
+Roles are:
+- `free`: no restrictions, as in the original game (the default).
+- `border`: stays in the border zone, the home cells fewest moves from the enemy side (`border_fraction` of them, default 0.25), or on the enemy side.
+- `deep`: stays in the deep zone, the rest of the home side.
+- `greedy`: cannot return home until it carries `attacker_food` food (default 5, or all the food left).
+- `capped`: cannot carry more than `attacker_food` food.
+
+Defenders (`border` and `deep`) never eat food. Moves that break an agent's role become Stop. `infos[agent]["action_mask"]` marks the allowed actions.
+
+`map_name` is `"default"` (used if omitted), `"tiny"`, `"open"`, `"alley"`, `"blox"`, `"crowded"`, `"distant"`, `"fast"`, `"jumbo"`, `"medium"`, `"office"`, `"strategic"` or `"test"`.
+
 ## Examples
 
 ```bash
@@ -118,4 +142,5 @@ python examples/battlefield.py      # battlefield with custom team composition
 python examples/football.py         # football with custom roles per team
 python examples/capture_the_flag.py # capture the flag with custom shooter types per team
 python examples/king_of_the_hill.py # king of the hill with custom shooter types per team
+python examples/pacman_ctf.py       # pacman capture the flag with custom roles per team
 ```
