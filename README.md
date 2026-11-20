@@ -107,6 +107,8 @@ env = make("king_of_the_hill", red_wide=3, red_long=2, blue_wide=2, blue_long=3)
 
 A team scores every step it holds the hill in the centre (80% painted in its colour). Shooter types and mechanics are as in capture the flag.
 
+Both games take an optional `map_name`: `"default"` (the original map, used if omitted), `"open"` or `"cover"`.
+
 ## Examples
 
 ```bash
