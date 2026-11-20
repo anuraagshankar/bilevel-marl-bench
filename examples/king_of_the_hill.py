@@ -3,9 +3,10 @@
 from bilevel_marl_bench import make
 
 env = make(
-    "king_of_the_hill", 
-    red_wide=3, red_long=2, 
-    blue_wide=2, blue_long=3, 
+    "king_of_the_hill",
+    map_name="open",  # or "cover"
+    red_wide=1, red_long=1, 
+    blue_wide=1, blue_long=1, 
     render_mode="human"
 )
 

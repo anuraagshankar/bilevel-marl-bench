@@ -13,3 +13,6 @@ magent = ["magent2==0.3.4"]
 vmas = ["vmas==1.5.2", "gymnasium", "shimmy==2.0.1"]
 meltingpot = ["dm-meltingpot==2.4.1", "shimmy==2.0.1"]
 all = ["bilevel-marl-bench[magent,vmas,meltingpot]"]
+
+[tool.setuptools.package-data]
+bilevel_marl_bench = ["_internal/paintball/maps/*/*.txt"]

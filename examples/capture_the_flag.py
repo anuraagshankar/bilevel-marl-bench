@@ -3,9 +3,10 @@
 from bilevel_marl_bench import make
 
 env = make(
-    "capture_the_flag", 
-    red_wide=3, red_long=2, 
-    blue_wide=2, blue_long=3, 
+    "capture_the_flag",
+    map_name="open",  # or "cover"
+    red_wide=1, red_long=1, 
+    blue_wide=1, blue_long=1, 
     render_mode="human"
 )
 

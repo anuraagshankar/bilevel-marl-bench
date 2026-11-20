@@ -14,7 +14,7 @@ def make(name, **kwargs):
         return Battlefield(**kwargs)
     if name == "football":
         from .football import FootballScenario
-        from .vmas_parallel import VmasParallelEnv
+        from ._internal.vmas_parallel import VmasParallelEnv
 
         return VmasParallelEnv(FootballScenario(), title="Football", **kwargs)
     if name in ("capture_the_flag", "king_of_the_hill"):
