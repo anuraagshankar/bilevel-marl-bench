@@ -1,6 +1,6 @@
 """Bilevel MARL benchmark. Every environment is a PettingZoo ParallelEnv."""
 
-ENVS = ["combined_arms", "battlefield", "football", "capture_the_flag", "king_of_the_hill"]
+ENVS = ["combined_arms", "battlefield", "football", "capture_the_flag", "king_of_the_hill", "pacman_ctf"]
 
 
 def make(name, **kwargs):
@@ -21,4 +21,10 @@ def make(name, **kwargs):
         from .paintball import Paintball
 
         return Paintball(name, **kwargs)
+    if name == "pacman_ctf":
+        from pettingzoo.utils.conversions import aec_to_parallel
+
+        from .pacman_ctf import PacmanCTF
+
+        return aec_to_parallel(PacmanCTF(**kwargs))
     raise ValueError(f"Unknown env '{name}'. Available: {ENVS}")

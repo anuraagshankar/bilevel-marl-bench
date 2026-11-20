@@ -15,4 +15,4 @@ meltingpot = ["dm-meltingpot==2.4.1", "shimmy==2.0.1"]
 all = ["bilevel-marl-bench[magent,vmas,meltingpot]"]
 
 [tool.setuptools.package-data]
-bilevel_marl_bench = ["_internal/paintball/maps/*/*.txt"]
+bilevel_marl_bench = ["_internal/paintball/maps/*/*.txt", "_internal/pacman_ctf/maps/*.txt"]
